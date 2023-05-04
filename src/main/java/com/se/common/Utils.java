@@ -2,9 +2,7 @@ package com.se.common;
 
 import java.sql.Date;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.List;
 
 import org.springframework.stereotype.Component;

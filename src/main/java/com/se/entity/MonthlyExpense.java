@@ -1,7 +1,5 @@
 package com.se.entity;
 
-import java.sql.Date;
-
 import lombok.Data;
 
 @Data
