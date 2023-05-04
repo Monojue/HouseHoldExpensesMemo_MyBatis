@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.se.mapper.ExpenseMapper">
+
+	<select id="getDailyList" resultMap="dailyMap">
+		select * from expense 
+		where CAST(EDATE AS VARCHAR) like '${month}%'
+		order by edate DESC
+	</select>
+
+	<select id="getMontlyList" resultMap="monthlyMap">
+		select to_char(EDATE, 'YYYY/MM') AS edate,
+		sum(amount) as total 
+		from expense 
+		group by to_char(EDATE, 'YYYY/MM') 
+		order by to_char(EDATE, 'YYYY/MM') DESC
+	</select>
+
+	<select id="getMonthlyExpenseByMonth" resultMap="monthlyMap">
+		select to_char(EDATE, 'YYYY/MM') as edate,
+		sum(amount) as total 
+		from expense 
+		where CAST(EDATE AS VARCHAR) like CONCAT(#{month},'%') 
+		group by to_char(EDATE, 'YYYY/MM')
+	</select>
+	
+	<select id="findById" resultMap="dailyMap">
+		select * from expense
+		where id=#{id}
+	</select>	
+
+	<insert id="insert">
+		insert into expense
+		(name, edate, amount)
+		values
+		(#{name}, #{edate}, #{amount})
+	</insert>
+
+	<update id="update">
+		update expense
+		set name=#{name},
+			edate=#{edate},
+			amount=#{amount}
+		where id=#{id}
+	</update>
+	
+	<delete id="delete">
+		delete from expense
+		where id=#{id}
+	</delete>
+
+	<resultMap type="com.se.entity.DailyExpense" id="dailyMap">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="edate" property="edate" />
+		<result column="amount" property="amount" />
+	</resultMap>
+	
+	<resultMap type="com.se.entity.MonthlyExpense" id="monthlyMap">
+		<result column="edate" property="edate" />
+		<result column="total" property="total" />
+	</resultMap>
+
+</mapper>
