@@ -4,9 +4,7 @@ import java.sql.Date;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.stereotype.Component;
-
 import com.se.entity.DailyExpense;
 import com.se.entity.MonthlyExpense;
 import com.se.form.DailyExpenseForm;
@@ -64,14 +62,19 @@ public class Utils {
 		MontlyExpenseForm mef = new MontlyExpenseForm();
 		mef.setEdate(me.getEdate().toString().replaceAll("-", "/"));
 		mef.setTotal(addCommaToMoney(me.getTotal()));
-
 		return mef;
 	}
 
-	// money comma separator
+	// money comma separator using Currency Format
+//	public String addCommaToMoney(Integer amount) {
+//		NumberFormat japanFormat = NumberFormat.getCurrencyInstance(Locale.JAPAN);
+//		return japanFormat.format(new BigDecimal(amount));
+//	}
+
+	// money comma separator using DecimalFormat
 	public String addCommaToMoney(Integer amount) {
 		DecimalFormat formatter = new DecimalFormat("###,###");
-		return formatter.format(amount);
+		return formatter.format(amount).concat(" JPY");
 	}
 
 }

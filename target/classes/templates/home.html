@@ -37,7 +37,7 @@
 				style="text-decoration: none;">
 				<div class="card-body row">
 					<div class="col" th:text="${m.edate}">Month</div>
-					<div class="col-6" th:text="${m.total} + ' 	JPY'">Total</div>
+					<div class="col-6" th:text="${m.total}">Total</div>
 					<a class="col-1 stretched-link" th:href="@{/detail/{month}(month=${m.edate})}">
 						<i class="bi bi-arrow-right-circle"></i>
 					</a>

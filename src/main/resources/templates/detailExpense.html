@@ -36,28 +36,17 @@
 			</div>
 			<div class="card mb-1 bg-secondary">
 				<span class="col text-white card-body"
-					th:text="'合計 ('+${total?.total} +' JPY)'"></span>
+					th:text="'合計 ('+${total?.total} +')'"></span>
 			</div>
-<!-- 			<a th:each="m : ${list}" th:href="@{/update/{id}(id=${m.id})}" -->
-<!-- 				class="card mb-1" style="text-decoration: none;"> -->
-<!-- 				<div class="card-body row"> -->
-<!-- 					<div class="col" th:text="${m.edate}">Month</div> -->
-<!-- 					<div class="col" th:text="${m.name}">Name</div> -->
-<!-- 					<div class="col" th:text="${m.amount} + ' JPY'">Amount</div> -->
-<!-- 					<div class="col-1"> -->
-<!-- 						<i class="bi bi-arrow-right-circle"></i> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</a> -->
 			<div th:each="m : ${list}" class="card mb-1 d-block">
 				<div class="card-body row">
 					<div class="col" th:text="${m.edate}">Month</div>
 					<div class="col" th:text="${m.name}">Name</div>
-					<div class="col" th:text="${m.amount} + ' JPY'">Amount</div>
+					<div class="col" th:text="${m.amount}">Amount</div>
 					<a class="col-1" th:href="@{/delete/{id}(id=${m.id})}">
 						<i class="bi bi-trash" style="color:red;"></i>
 					</a>
-					<a class="col-1" th:href="@{/update/{id}(id=${m.id})}">
+					<a class="col-1" th:href="@{'/detail/'+${base}+'/update/{id}'(id=${m.id})}">
 						<i class="bi bi-arrow-right-circle"></i>
 					</a>
 				</div>

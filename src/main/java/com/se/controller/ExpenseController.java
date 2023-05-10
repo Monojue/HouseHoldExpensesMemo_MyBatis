@@ -19,8 +19,6 @@ public class ExpenseController {
 
 	@Autowired
 	ExpenseService expenseService;
-	
-	String year;
 
 	@GetMapping("/")
 	public String home(Model model) {
@@ -44,28 +42,28 @@ public class ExpenseController {
 		return "redirect:/";
 	}
 
-	@GetMapping("/update/{id}")
-	public String updateExpense(Model model, @PathVariable Integer id) {
+	@GetMapping("/detail/{year}/{month}/update/{id}")
+	public String updateExpense(Model model,@PathVariable String year, @PathVariable String month, @PathVariable Integer id) {
 		model.addAttribute("form", this.expenseService.getDailyExpenseById(id));
-		model.addAttribute("month", this.year);
+		model.addAttribute("month", year.concat("/").concat(month));
 		model.addAttribute("add", false);
 		return "inputExpense";
 	}
 
-	@PostMapping("/update")
-	public String updateExpense(@Valid @ModelAttribute("form") DailyExpenseForm e, BindingResult result) {
+	@PostMapping("/update/{year}/{month}")
+	public String updateExpense(@PathVariable String year, @PathVariable String month, @Valid @ModelAttribute("form") DailyExpenseForm e, BindingResult result) {
 		if (result.hasErrors()) {
 			return "inputExpense";
 		}
 		this.expenseService.updateDailyExense(e);
-		return "redirect:/";
+		return "redirect:/detail/" + year.concat("/").concat(month);
 	}
 
 	@GetMapping("/detail/{year}/{month}")
 	public String detailExpense(Model model, @PathVariable String year, @PathVariable String month) {
-		this.year = year +"/"+ month;
 		model.addAttribute("list", this.expenseService.getDailyList(year + "-" + month));
 		model.addAttribute("total", this.expenseService.getMonthlyListByMonth(year + "-" + month));
+		model.addAttribute("base", year.concat("/").concat(month));
 		return "detailExpense";
 	}
 
