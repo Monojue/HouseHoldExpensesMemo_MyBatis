@@ -50,14 +50,14 @@
 		where id=#{id}
 	</delete>
 
-	<resultMap type="com.se.entity.DailyExpense" id="dailyMap">
+	<resultMap type="com.se.entity.Expense" id="dailyMap">
 		<id column="id" property="id" />
 		<result column="name" property="name" />
 		<result column="edate" property="edate" />
 		<result column="amount" property="amount" />
 	</resultMap>
 	
-	<resultMap type="com.se.entity.MonthlyExpense" id="monthlyMap">
+	<resultMap type="com.se.dto.MonthlyExpenseDto" id="monthlyMap">
 		<result column="edate" property="edate" />
 		<result column="total" property="total" />
 	</resultMap>

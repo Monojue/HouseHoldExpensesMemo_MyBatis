@@ -4,8 +4,14 @@ import java.sql.Date;
 
 import lombok.Data;
 
+/**
+ * Expense
+ * 
+ * @author ASUS
+ *
+ */
 @Data
-public class DailyExpense {
+public class Expense {
 
 	int id;
 	Date edate;

@@ -4,6 +4,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
+/**
+ * Form for daily expense of a month
+ * 
+ * @author ASUS
+ *
+ */
 @Data
 public class DailyExpenseForm {
 
